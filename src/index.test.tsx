@@ -1,4 +1,12 @@
-
+/**
+ * index.test.tsx
+ *
+ * @description Tests for the React utilities/types.
+ *
+ * @author jasmith79@gmail.com
+ * @copyright Jared Smith, 2020
+ * @license MIT
+ */
 import 'jsdom-global/register';
 
 import Enzyme, { shallow, mount } from 'enzyme';
