@@ -9,6 +9,7 @@
  */
 
 import React from 'react';
+import { HTMLFormControl } from '@jasmith79/ts-utils';
 
 export type RenderPropsFn<T extends {}> = {
   (props: T): React.ReactElement<T>
@@ -53,6 +54,12 @@ export const useRenderProps = <T extends {} = {}>({
   render,
   component,
 }: RenderProps<T>) => {
+  if (process?.env?.NODE_ENV !== 'production'
+    && [children, render, component].filter(x => x != null).length > 1
+  ) {
+    console.warn('You should supply only one of component, render prop, ora function child.');
+  }
+
   return component
     ? (params: T) => { const Component = component; return <Component { ...params } />; }
     : render
@@ -60,4 +67,26 @@ export const useRenderProps = <T extends {} = {}>({
       : typeof children === 'function'
         ? children
         : (...args: any[]) => null;
+};
+
+/**
+ * @description Extracts a value, if present, from a React.SyntheticEvent.
+ * NOTE: React events are pooled, this will not work asynchronously. Even
+ * if you call event.persist(), if the underlying input is a controlled
+ * component you will get the live value, use care when trying to pull
+ * this from e.g. a debounced input handler.
+ *
+ * @param event The React.SyntheticEvent to get the value from.
+ * @returns The extracted event value.
+ */
+export const extractSyntheticEventValue = (event: React.SyntheticEvent): string => {
+  const target = event.target ? event.target as HTMLFormControl : null;
+  const currentTarget = event.currentTarget ? event.currentTarget as HTMLFormControl : null;
+  const targetValue = target?.value;
+  const currentTargetValue = currentTarget?.value;
+  return targetValue == null
+    ? currentTargetValue == null
+      ? ''
+      : currentTargetValue
+    : targetValue;
 };

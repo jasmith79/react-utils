@@ -43,3 +43,14 @@ export declare type Dispatch<A> = (action: A) => void;
  * @returns The render function for the calling component.
  */
 export declare const useRenderProps: <T extends {} = {}>({ children, render, component, }: RenderProps<T>) => ((params: T) => JSX.Element) | ((...args: any[]) => null);
+/**
+ * @description Extracts a value, if present, from a React.SyntheticEvent.
+ * NOTE: React events are pooled, this will not work asynchronously. Even
+ * if you call event.persist(), if the underlying input is a controlled
+ * component you will get the live value, use care when trying to pull
+ * this from e.g. a debounced input handler.
+ *
+ * @param event The React.SyntheticEvent to get the value from.
+ * @returns The extracted event value.
+ */
+export declare const extractSyntheticEventValue: (event: React.SyntheticEvent<Element, Event>) => string;
