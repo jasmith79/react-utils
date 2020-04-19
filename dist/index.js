@@ -32,7 +32,8 @@ const react_1 = __importDefault(require("react"));
  * @returns The render function for the calling component.
  */
 exports.useRenderProps = ({ children, render, component, }) => {
-    if (process?.env?.NODE_ENV !== 'production'
+    var _a;
+    if (((_a = process === null || process === void 0 ? void 0 : process.env) === null || _a === void 0 ? void 0 : _a.NODE_ENV) !== 'production'
         && [children, render, component].filter(x => x != null).length > 1) {
         console.warn('You should supply only one of component, render prop, ora function child.');
     }
@@ -57,8 +58,8 @@ exports.useRenderProps = ({ children, render, component, }) => {
 exports.extractSyntheticEventValue = (event) => {
     const target = event.target ? event.target : null;
     const currentTarget = event.currentTarget ? event.currentTarget : null;
-    const targetValue = target?.value;
-    const currentTargetValue = currentTarget?.value;
+    const targetValue = target === null || target === void 0 ? void 0 : target.value;
+    const currentTargetValue = currentTarget === null || currentTarget === void 0 ? void 0 : currentTarget.value;
     return targetValue == null
         ? currentTargetValue == null
             ? ''
