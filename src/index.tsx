@@ -61,7 +61,7 @@ export const useRenderProps = <T extends {} = {}>({
   }
 
   return component
-    ? (params: T) => { const Component = component; return <Component { ...params } />; }
+    ? (params: T = ({} as T)) => { const Component = component; return <Component { ...params } />; }
     : render
       ? render
       : typeof children === 'function'
