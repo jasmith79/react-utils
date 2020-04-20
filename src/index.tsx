@@ -57,7 +57,7 @@ export const useRenderProps = <T extends {} = {}>({
   if (process?.env?.NODE_ENV !== 'production'
     && [children, render, component].filter(x => x != null).length > 1
   ) {
-    console.warn('You should supply only one of component, render prop, ora function child.');
+    console.warn('You should supply only one of component, render prop, or a child node/function.');
   }
 
   return component
