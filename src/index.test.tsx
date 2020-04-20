@@ -43,6 +43,10 @@ const TestComponent = ({
     children,
   });
 
+  if (typeof renderTarget !== 'function') {
+    throw new Error('No render target!');
+  }
+
   return renderTarget({ b: '' + a });
 };
 

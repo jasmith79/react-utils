@@ -66,7 +66,7 @@ export const useRenderProps = <T extends {} = {}>({
       ? render
       : typeof children === 'function'
         ? children
-        : (...args: any[]) => null;
+        : null;
 };
 
 /**
