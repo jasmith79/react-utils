@@ -17,7 +17,7 @@ export type RenderPropsFn<T extends {}> = {
 
 export type RenderProps<T extends {}> = {
   children?: React.ReactChild | RenderPropsFn<T>,
-  render?: (props: T) => React.ReactElement<T>,
+  render?: RenderPropsFn<T>,
   component?: React.ComponentType<T>,
 }
 
@@ -66,7 +66,7 @@ export const useRenderProps = <T extends {} = {}>({
       ? render
       : typeof children === 'function'
         ? children
-        : null;
+        : (..._args: any[]) => children as React.ReactElement;
 };
 
 /**

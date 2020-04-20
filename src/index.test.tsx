@@ -94,6 +94,17 @@ describe('useRenderProps', () => {
     expect(b).toBe('3');
   });
 
+  it('should correctly use a regular child', () => {
+    const wrapper = mount(
+      <TestComponent a={3}>
+        <div>7</div>
+      </TestComponent>
+    );
+
+    const b = wrapper.find('div').at(0).text().trim();
+    expect(b).toBe('7');
+  });
+
   it('should correctly use a render prop', () => {
     const render = ({ b }: { b: string }) => (
       <div>{b}</div>
@@ -116,5 +127,17 @@ describe('useRenderProps', () => {
 
     const b = wrapper.find('div').at(0).text().trim();
     expect(b).toBe('3');
+  });
+
+  it('should work correctly with a component that takes no props', () => {
+    const Bar = class Bar extends React.Component {
+      render () {
+        return <div>7</div>;
+      }
+    };
+
+    const wrapper = mount(<Bar />);
+    const b = wrapper.find('div').at(0).text().trim();
+    expect(b).toBe('7');
   });
 });

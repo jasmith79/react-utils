@@ -13,7 +13,7 @@ export declare type RenderPropsFn<T extends {}> = {
 };
 export declare type RenderProps<T extends {}> = {
     children?: React.ReactChild | RenderPropsFn<T>;
-    render?: (props: T) => React.ReactElement<T>;
+    render?: RenderPropsFn<T>;
     component?: React.ComponentType<T>;
 };
 /**
@@ -42,7 +42,7 @@ export declare type Dispatch<A> = (action: A) => void;
  * @param params.component The Component prop passed to the function component calling the hook.
  * @returns The render function for the calling component.
  */
-export declare const useRenderProps: <T extends {} = {}>({ children, render, component, }: RenderProps<T>) => ((params: T) => JSX.Element) | ((...args: any[]) => null);
+export declare const useRenderProps: <T extends {} = {}>({ children, render, component, }: RenderProps<T>) => RenderPropsFn<T> | ((params?: T) => JSX.Element) | ((..._args: any[]) => React.ReactElement<any, string | ((props: any) => React.ReactElement<any, string | any | (new (props: any) => React.Component<any, any, any>)> | null) | (new (props: any) => React.Component<any, any, any>)>);
 /**
  * @description Extracts a value, if present, from a React.SyntheticEvent.
  * NOTE: React events are pooled, this will not work asynchronously. Even

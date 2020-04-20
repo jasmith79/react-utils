@@ -35,15 +35,15 @@ exports.useRenderProps = ({ children, render, component, }) => {
     var _a;
     if (((_a = process === null || process === void 0 ? void 0 : process.env) === null || _a === void 0 ? void 0 : _a.NODE_ENV) !== 'production'
         && [children, render, component].filter(x => x != null).length > 1) {
-        console.warn('You should supply only one of component, render prop, ora function child.');
+        console.warn('You should supply only one of component, render prop, or a child node/function.');
     }
     return component
-        ? (params) => { const Component = component; return react_1.default.createElement(Component, Object.assign({}, params)); }
+        ? (params = {}) => { const Component = component; return react_1.default.createElement(Component, Object.assign({}, params)); }
         : render
             ? render
             : typeof children === 'function'
                 ? children
-                : (...args) => null;
+                : (..._args) => children;
 };
 /**
  * @description Extracts a value, if present, from a React.SyntheticEvent.
