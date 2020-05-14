@@ -53,4 +53,4 @@ export declare const useRenderProps: <T extends {} = {}>({ children, render, com
  * @param event The React.SyntheticEvent to get the value from.
  * @returns The extracted event value.
  */
-export declare const extractSyntheticEventValue: (event: React.SyntheticEvent<Element, Event>) => string;
+export declare const extractSyntheticEventValue: <T>(event: React.SyntheticEvent<Element, Event>) => string | T | string[];
