@@ -55,15 +55,19 @@ exports.useRenderProps = ({ children, render, component, }) => {
  * @param event The React.SyntheticEvent to get the value from.
  * @returns The extracted event value.
  */
-exports.extractSyntheticEventValue = (event) => {
+function extractSyntheticEventValue(event) {
+    var _a;
     const target = event.target ? event.target : null;
     const currentTarget = event.currentTarget ? event.currentTarget : null;
-    const targetValue = target === null || target === void 0 ? void 0 : target.value;
+    const targetValue = (_a = target) === null || _a === void 0 ? void 0 : _a.value;
     const currentTargetValue = currentTarget === null || currentTarget === void 0 ? void 0 : currentTarget.value;
-    return targetValue == null
+    const value = targetValue == null
         ? currentTargetValue == null
             ? ''
             : currentTargetValue
         : targetValue;
-};
+    return value;
+}
+exports.extractSyntheticEventValue = extractSyntheticEventValue;
+;
 //# sourceMappingURL=index.js.map

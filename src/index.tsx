@@ -79,16 +79,18 @@ export const useRenderProps = <T extends {} = {}>({
  * @param event The React.SyntheticEvent to get the value from.
  * @returns The extracted event value.
  */
-export const extractSyntheticEventValue = <T,>(
-  event: React.SyntheticEvent
-): string | string[] | T => {
-  const target = event.target ? event.target as HTMLFormControl : null;
-  const currentTarget = event.currentTarget ? event.currentTarget as HTMLFormControl : null;
-  const targetValue = target?.value;
+export function extractSyntheticEventValue <T = string>(
+  event: React.SyntheticEvent<HTMLFormControl>
+): T {
+  const target = event.target ? event.target : null;
+  const currentTarget = event.currentTarget ? event.currentTarget : null;
+  const targetValue = (target as HTMLFormControl)?.value;
   const currentTargetValue = currentTarget?.value;
-  return targetValue == null
+  const value: unknown = targetValue == null
     ? currentTargetValue == null
       ? ''
       : currentTargetValue
     : targetValue;
+
+  return value as T;
 };

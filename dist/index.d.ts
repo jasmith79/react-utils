@@ -8,6 +8,7 @@
  * @license MIT
  */
 import React from 'react';
+import { HTMLFormControl } from '@jasmith79/ts-utils';
 export declare type RenderPropsFn<T extends {}> = {
     (props: T): React.ReactElement<T>;
 };
@@ -53,4 +54,4 @@ export declare const useRenderProps: <T extends {} = {}>({ children, render, com
  * @param event The React.SyntheticEvent to get the value from.
  * @returns The extracted event value.
  */
-export declare const extractSyntheticEventValue: <T>(event: React.SyntheticEvent<Element, Event>) => string | T | string[];
+export declare function extractSyntheticEventValue<T = string>(event: React.SyntheticEvent<HTMLFormControl>): T;
